@@ -25,19 +25,23 @@ export default function Home() {
   } = useOkto() as OktoContextType;
   const idToken = useMemo(() => (session ? session.id_token : null), [session]);
 
-  function handleAuthenticate() {
+  async function handleAuthenticate(): Promise<any> {
     if (!idToken) {
-      return;
+      return { result : false}
     }
+    let result = false;
     authenticate(idToken, (result: any, error: any) => {
       if (result) {
         console.log("Authentication successful");
+        result = true;
+        return { result };
       }
       if (error) {
         console.error("Authentication error:", error);
         signOut(); // Google SignOut
       }
     });
+    return { result };
   }
 
   useEffect(() => {
@@ -61,7 +65,7 @@ export default function Home() {
 
       <GetButton
         title="Okto Authenticate"
-        apiFn={async () => handleAuthenticate()}
+        apiFn={handleAuthenticate}
       />
       <GetButton title="Okto Log out" apiFn={async () => logOut()} />
       <GetButton title="getPortfolio" apiFn={getPortfolio} />
