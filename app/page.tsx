@@ -29,19 +29,18 @@ export default function Home() {
     if (!idToken) {
       return { result : false}
     }
-    let result = false;
     authenticate(idToken, (result: any, error: any) => {
       if (result) {
         console.log("Authentication successful");
-        result = true;
-        return { result };
+        return { result: true };
       }
       if (error) {
         console.error("Authentication error:", error);
         signOut(); // Google SignOut
+        return { result : false}
       }
     });
-    return { result };
+    return { result: "authenticate" };
   }
 
   useEffect(() => {
