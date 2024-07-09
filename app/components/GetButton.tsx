@@ -18,13 +18,15 @@ const GetButton: React.FC<GetButtonProps> = ({ title, apiFn }) => {
       })
       .catch((error) => {
         console.error(`${title} error:`, error);
+        setResultData(`error: ${error}`); // Pretty print the JSON
+        setModalVisible(true);
       });
   };
 
   const handleClose = () => setModalVisible(false);
 
   return (
-    <div className="text-center">
+    <div className="text-center text-white">
       <button
         className="px-4 py-2 w-full bg-blue-500 text-white rounded"
         onClick={handleButtonClick}
@@ -44,7 +46,7 @@ const GetButton: React.FC<GetButtonProps> = ({ title, apiFn }) => {
                 &times;
               </button>
             </div>
-            <div className="text-left max-h-96 overflow-y-auto">
+            <div className="text-left text-white max-h-96 overflow-y-auto">
               <pre className="whitespace-pre-wrap break-words">
                 {resultData}
               </pre>
