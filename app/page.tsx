@@ -38,7 +38,6 @@ export default function Home() {
           resolve({ result: true });
         } else if (error) {
           console.error("Authentication error:", error);
-          signOut(); // Google SignOut
           resolve({ result: false, error });
         }
       });
