@@ -29,27 +29,29 @@ export default function Home() {
 
   async function handleAuthenticate(): Promise<any> {
     if (!idToken) {
-      return { result: false };
+      return { result: false, error: "No google login" };
     }
-    authenticate(idToken, (result: any, error: any) => {
-      if (result) {
-        console.log("Authentication successful");
-        return { result: true };
-      }
-      if (error) {
-        console.error("Authentication error:", error);
-        signOut(); // Google SignOut
-        return { result: false };
-      }
+    return new Promise((resolve) => {
+      authenticate(idToken, (result: any, error: any) => {
+        if (result) {
+          console.log("Authentication successful");
+          resolve({ result: true });
+        } else if (error) {
+          console.error("Authentication error:", error);
+          signOut(); // Google SignOut
+          resolve({ result: false, error });
+        }
+      });
     });
-    return { result: "authenticate" };
   }
 
   async function handleLogout() {
     try {
       logOut();
-      return {result: "logout success"}
-    } catch (error) {return { result: "logout failed" };}
+      return { result: "logout success" };
+    } catch (error) {
+      return { result: "logout failed" };
+    }
   }
 
   useEffect(() => {
