@@ -24,9 +24,9 @@ const GetButton: React.FC<GetButtonProps> = ({ title, apiFn }) => {
   const handleClose = () => setModalVisible(false);
 
   return (
-    <div className="text-center mt-4">
+    <div className="text-center">
       <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+        className="px-4 py-2 w-full bg-blue-500 text-white rounded"
         onClick={handleButtonClick}
       >
         {title}
