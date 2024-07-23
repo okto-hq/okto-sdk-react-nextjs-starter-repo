@@ -74,10 +74,10 @@ function TransferTokens({ apiFn }) {
       </button>
 
       {modalVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed text-white inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
           <div className="bg-black rounded-lg w-11/12 max-w-md p-6">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
-              <h2 className="text-lg font-semibold">Transfer Status</h2>
+              <div className="text-white text-lg font-semibold">Transfer Tokens</div>
               <button
                 className="text-gray-500 hover:text-gray-700"
                 onClick={handleCloseModal}

@@ -7,6 +7,7 @@ import GetButton from "./components/GetButton";
 import TransferTokens from "./components/TransferTokens";
 import { useAppContext } from "./components/AppContext";
 import AuthButton from "./components/AuthButton";
+import SendRawTransaction from "./components/SendRawTransaction";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -123,8 +124,9 @@ export default function Home() {
           Show Modal
         </button>
       </div>
-      <div className="w-full max-w-lg">
+      <div className="flex flex-col gap-2 w-full max-w-lg">
         <TransferTokens apiFn={transferTokens} />
+        <SendRawTransaction apiFn={executeRawTransaction} />
       </div>
     </main>
   );
