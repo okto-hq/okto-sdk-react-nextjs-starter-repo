@@ -6,6 +6,7 @@ import { useOkto, OktoContextType, BuildType } from "okto-sdk-react";
 import GetButton from "./components/GetButton";
 import TransferTokens from "./components/TransferTokens";
 import { useAppContext } from "./components/AppContext";
+import AuthButton from "./components/AuthButton";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -13,6 +14,7 @@ export default function Home() {
   const {
     isLoggedIn,
     authenticate,
+    authenticateWithUserId,
     logOut,
     getPortfolio,
     transferTokens,
@@ -24,6 +26,14 @@ export default function Home() {
     orderHistory,
     getNftOrderDetails,
     showWidgetModal,
+    getRawTransactionStatus,
+    transferTokensWithJobStatus,
+    transferNft,
+    transferNftWithJobStatus,
+    executeRawTransaction,
+    executeRawTransactionWithJobStatus,
+    setTheme,
+    getTheme,
   } = useOkto() as OktoContextType;
   const idToken = useMemo(() => (session ? session.id_token : null), [session]);
 
@@ -90,6 +100,7 @@ export default function Home() {
         <LoginButton />
 
         <GetButton title="Okto Authenticate" apiFn={handleAuthenticate} />
+        <AuthButton authenticateWithUserId={authenticateWithUserId}/>
         <GetButton title="Okto Log out" apiFn={handleLogout} />
         <GetButton title="getPortfolio" apiFn={getPortfolio} />
         <GetButton title="getSupportedNetworks" apiFn={getSupportedNetworks} />
@@ -98,6 +109,7 @@ export default function Home() {
         <GetButton title="getWallets" apiFn={getWallets} />
         <GetButton title="createWallet" apiFn={createWallet} />
         <GetButton title="orderHistory" apiFn={() => orderHistory({})} />
+        {/* <GetButton title="getRawTransactionStatus" apiFn={() => getRawTransactionStatus({})} /> */}
         <GetButton
           title="getNftOrderDetails"
           apiFn={() => getNftOrderDetails({})}
