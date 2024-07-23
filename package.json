@@ -13,7 +13,7 @@
     "axios": "^1.7.2",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
-    "okto-sdk-react": "file:okto-sdk-react-0.0.1.tgz",
+    "okto-sdk-react": "^0.0.2",
     "react": "^18",
     "react-dom": "^18"
   },
