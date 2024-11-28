@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { LoginButton } from "./components/LoginButton";
-import { useOkto, OktoContextType, BuildType } from "okto-sdk-react";
+import { useOkto, OktoContextType, BuildType, AuthType } from "okto-sdk-react";
 import GetButton from "./components/GetButton";
 import TransferTokens from "./components/TransferTokens";
 import { useAppContext } from "./components/AppContext";
@@ -29,6 +29,7 @@ export default function Home() {
     orderHistory,
     getNftOrderDetails,
     showWidgetModal,
+    showOnboardingModal,
     getRawTransactionStatus,
     transferTokensWithJobStatus,
     transferNft,
@@ -147,6 +148,14 @@ export default function Home() {
           }}
         >
           Show Modal
+        </button>
+        <button
+          className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onClick={() => {
+            showOnboardingModal(AuthType.GAUTH, "Test App");
+          }}
+        >
+          Show Onboarding Modal
         </button>
       </div>
       
