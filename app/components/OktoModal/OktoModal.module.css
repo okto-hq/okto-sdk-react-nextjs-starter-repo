@@ -1,0 +1,74 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modalContainer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #292929;
+  padding: 0.5rem;
+  border-radius: 24px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.625rem;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.headerText {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #A0A0A0;
+}
+
+.iconContainer {
+  display: flex;
+  transform: scale(0.8);
+  gap: 0.625rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.closeButton {
+  padding: 0.125rem;
+  transition: transform 0.3s;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.closeButton:hover {
+  transform: rotate(360deg);
+}
+
+.modalTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  width: 22rem;
+  height: 32rem;
+  background-color: #6B7280; /* Equivalent to bg-gray-500 */
+  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

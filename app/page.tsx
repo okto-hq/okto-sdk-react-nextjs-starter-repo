@@ -10,6 +10,7 @@ import AuthButton from "./components/AuthButton";
 import SendRawTransaction from "./components/SendRawTransaction";
 import { EmailOTPVerification } from "./components/EmailOTPVerification";
 import { PhoneOTPVerification } from "./components/PhoneOTPVerification";
+import { OktoModal } from "./components/OktoModal/OktoModal";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -73,8 +74,15 @@ export default function Home() {
     }
   }, [isLoggedIn]);
 
+  // useEffect(() => {
+  //   setTheme({
+  //     backgroundColor: "0xFFFFFFFF",
+  //   })
+  // }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
+      {/* <OktoModal /> */}
       <div className="text-black font-bold text-3xl mb-8">Okto SDK</div>
 
       {/* status indicator */}
@@ -152,10 +160,21 @@ export default function Home() {
         <button
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={() => {
-            showOnboardingModal(AuthType.GAUTH, "Test App");
+            showOnboardingModal();
           }}
         >
           Show Onboarding Modal
+        </button>
+        <button
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onClick={() => {
+              setTheme({
+                backgroundColor: "0xFFFFFFFF", // Light theme
+                // You can add more theme properties here
+              });
+            }}
+          >
+          Set Light Theme
         </button>
       </div>
       
