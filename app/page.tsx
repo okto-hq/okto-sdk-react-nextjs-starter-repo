@@ -97,6 +97,23 @@ export default function Home() {
     }
   }
 
+  async function handleReadContractAptos() {
+    try {
+      const result = await readContractData("APTOS_TESTNET",
+        {
+          function:
+          "0x0000000000000000000000000000000000000000000000000000000000000001::chain_id::get",
+          typeArguments: [],
+          functionArguments: []
+        }
+      );
+      return result;
+    } catch (error) {
+      console.error("Read contract error:", error);
+      return { error };
+    }
+  }
+
   useEffect(() => {
     if (isLoggedIn) {
       console.log("Okto is authenticated");
@@ -172,6 +189,7 @@ export default function Home() {
           apiFn={() => getNftOrderDetails({})}
         />
         <GetButton title="Read Contract Data" apiFn={handleReadContract} />
+        <GetButton title="Read Contract Aptos" apiFn={handleReadContractAptos} />
         <button
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={() => {
