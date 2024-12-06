@@ -38,6 +38,7 @@ export default function Home() {
     executeRawTransactionWithJobStatus,
     setTheme,
     getTheme,
+    readContractData
   } = useOkto() as OktoContextType;
   const idToken = useMemo(() => (session ? session.id_token : null), [session]);
 
@@ -64,6 +65,35 @@ export default function Home() {
       return { result: "logout success" };
     } catch (error) {
       return { result: "logout failed" };
+    }
+  }
+
+  // Add this new function to handle the read contract data
+  async function handleReadContract() {
+    try {
+      const result = await readContractData("POLYGON",
+        {
+          contractAddress: "0x3BA4c387f786bFEE076A58914F5Bd38d668B42c3",
+          abi: {
+            inputs: [],
+            name: "totalSupply",
+            outputs: [
+              {
+                internalType: "uint256",
+                name: "",
+                type: "uint256"
+              }
+            ],
+            stateMutability: "view",
+            type: "function"
+          },
+          args: {}
+        }
+      );
+      return result;
+    } catch (error) {
+      console.error("Read contract error:", error);
+      return { error };
     }
   }
 
@@ -141,6 +171,7 @@ export default function Home() {
           title="getNftOrderDetails"
           apiFn={() => getNftOrderDetails({})}
         />
+        <GetButton title="Read Contract Data" apiFn={handleReadContract} />
         <button
           className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={() => {
