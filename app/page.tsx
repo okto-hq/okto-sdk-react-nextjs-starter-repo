@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { LoginButton } from "./components/LoginButton";
+import { LoginButton } from "@/app/components/LoginButton";
 import { useOkto, OktoContextType, BuildType, AuthType } from "okto-sdk-react";
-import GetButton from "./components/GetButton";
-import TransferTokens from "./components/TransferTokens";
-import { useAppContext } from "./components/AppContext";
-import AuthButton from "./components/AuthButton";
-import SendRawTransaction from "./components/SendRawTransaction";
-import { EmailOTPVerification } from "./components/EmailOTPVerification";
-import { PhoneOTPVerification } from "./components/PhoneOTPVerification";
+import GetButton from "@/app/components/GetButton";
+import TransferTokens from "@/app/components/TransferTokens";
+import { useAppContext } from "@/app/components/AppContext";
+import AuthButton from "@/app/components/AuthButton";
+import SendRawTransaction from "@/app/components/SendRawTransaction";
+import { EmailOTPVerification } from "@/app/components/EmailOTPVerification";
+import { PhoneOTPVerification } from "@/app/components/PhoneOTPVerification";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -39,7 +39,9 @@ export default function Home() {
     setTheme,
     getTheme,
     readContractData
-  } = useOkto() as OktoContextType;
+  } = useOkto();
+  
+  //@ts-ignore
   const idToken = useMemo(() => (session ? session.id_token : null), [session]);
 
   async function handleAuthenticate(): Promise<any> {
