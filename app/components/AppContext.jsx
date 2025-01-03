@@ -13,9 +13,6 @@ export const AppContextProvider = ({ children }) => {
   const { data: session } = useSession();
 
   async function handleGAuthCb() {
-    if(session) {
-      return session.id_token;
-    }
     await signIn("google");
     return "";
   }

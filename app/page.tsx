@@ -15,6 +15,7 @@ export default function Home() {
   const { data: session } = useSession();
   const { apiKey, setApiKey, buildType, setBuildType } = useAppContext();
   const {
+    isReady,
     isLoggedIn,
     authenticate,
     authenticateWithUserId,
@@ -118,10 +119,17 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      console.log("Okto is authenticated");
-    }
-  }, [isLoggedIn]);
+    if (!isReady) return;
+    if(!idToken) return;
+    authenticate(idToken, (result: any, error: any) => {
+      if (result) {
+        console.log("Authentication successful");
+      } else if (error) {
+        console.error("Authentication error:", error);
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isReady, idToken]);
 
   return (
     <main className="flex min-h-screen flex-col items-center space-y-6 p-12 bg-violet-200">
