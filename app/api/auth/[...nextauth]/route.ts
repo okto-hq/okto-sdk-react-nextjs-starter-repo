@@ -10,6 +10,9 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     async jwt({ token, user, account }) {
       if (account) {
@@ -19,6 +22,7 @@ export const authOptions: AuthOptions = {
     },
 
     async session({ session, token }) {
+      //@ts-ignore
       session.id_token = token.id_token;
       return session;
     },

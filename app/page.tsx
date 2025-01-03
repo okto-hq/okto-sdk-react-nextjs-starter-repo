@@ -64,6 +64,7 @@ export default function Home() {
   async function handleLogout() {
     try {
       logOut();
+      signOut();
       return { result: "logout success" };
     } catch (error) {
       return { result: "logout failed" };
