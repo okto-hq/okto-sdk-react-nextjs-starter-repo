@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useContext } from "react";
 import { OktoProvider, BuildType } from "okto-sdk-react";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -8,9 +8,31 @@ import { useSession, signIn, signOut } from "next-auth/react";
 export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
-  const [apiKey, setApiKey] = useState(process.env.NEXT_PUBLIC_OKTO_CLIENT_API || "");
-  const [buildType, setBuildType] = useState(BuildType.SANDBOX);
+  const [apiKey, setApiKey] = useState(() => {
+    // Try to load from localStorage during initialization
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('oktoApiKey') || process.env.NEXT_PUBLIC_OKTO_CLIENT_API || "";
+    }
+    return process.env.NEXT_PUBLIC_OKTO_CLIENT_API || "";
+  });
+
+  const [buildType, setBuildType] = useState(() => {
+    // Try to load from localStorage during initialization
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('oktoBuildType') || BuildType.SANDBOX;
+    }
+    return BuildType.SANDBOX;
+  });
+
   const { data: session } = useSession();
+
+  // Save to localStorage whenever values change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('oktoApiKey', apiKey);
+      localStorage.setItem('oktoBuildType', buildType);
+    }
+  }, [apiKey, buildType]);
 
   async function handleGAuthCb() {
     await signIn("google");
